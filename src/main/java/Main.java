@@ -8,7 +8,7 @@ public class Main {
         System.out.println(engine.search("бизнес"));
         try (ServerSocket serverSocket = new ServerSocket(8989)) {
             while (true) {
-                try (Socket socket = serverSocket.accept(); BufferedReader in = new BufferedReader(new InputStreamReader(((Socket) socket).getInputStream())); PrintWriter out = new PrintWriter(socket.getOutputStream())) {
+                try (Socket socket = serverSocket.accept(); BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream())); PrintWriter out = new PrintWriter(socket.getOutputStream())) {
                     String expectedWord = in.readLine();
                     out.println(engine.search(expectedWord));
                 }

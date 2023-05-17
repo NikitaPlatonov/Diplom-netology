@@ -8,16 +8,18 @@ import java.io.IOException;
 import java.util.*;
 
 public class BooleanSearchEngine implements SearchEngine {
-    private Map<String , List<PageEntry>> pageEntry = new HashMap<>();
+    private final Map<String, List<PageEntry>> pageEntry = new HashMap<>();
+
     public BooleanSearchEngine(File pdfsDir) throws IOException {
-        if(pdfsDir.exists() && pdfsDir.isDirectory()){
+        if (pdfsDir.exists() && pdfsDir.isDirectory()) {
             File[] pdfs = pdfsDir.listFiles();
-            if(pdfs != null) {
+            if (pdfs != null) {
                 for (File pdfFile : pdfs) {
                     var doc = new PdfDocument(new PdfReader(pdfFile));
-                    for(int i = 0; i < doc.getNumberOfPages();i++){
+                    for (int i = 0; i < doc.getNumberOfPages(); i++) {
                         PdfPage pdfPage = doc.getPage(i + 1);
-                        String[] words = pdfPage.toString().split("\\p{L}+");
+                        var text = PdfTextExtractor.getTextFromPage(pdfPage);
+                        String[] words = text.split("\\P{IsAlphabetic}+");
 
                         Map<String, Integer> freqs = new HashMap<>();
                         for (var word : words) {
@@ -28,16 +30,18 @@ public class BooleanSearchEngine implements SearchEngine {
                             freqs.put(word, freqs.getOrDefault(word, 0) + 1);
                         }
 
-                        for(String word : words){
+                        for (String word : words) {
                             word = word.toLowerCase();
-                            PageEntry query = new PageEntry(pdfFile.getName(), i + 1, freqs.get(word));
+                            int countUse = freqs.getOrDefault(word, 1);
+                            PageEntry query = new PageEntry(pdfFile.getName(), i + 1, countUse);
                             List<PageEntry> pageEntries;
-                            if(pageEntry.containsKey(word)){
+                            if (pageEntry.containsKey(word)) {
                                 pageEntries = pageEntry.get(word);
-                            } else{
+                            } else {
                                 pageEntries = new ArrayList<>();
                             }
                             pageEntries.add(query);
+                            Collections.sort(pageEntries);
                             pageEntry.put(word, pageEntries);
                         }
                     }
@@ -48,7 +52,6 @@ public class BooleanSearchEngine implements SearchEngine {
 
     @Override
     public List<PageEntry> search(String word) {
-        // тут реализуйте поиск по слову
-        return Collections.emptyList();
+        return pageEntry.getOrDefault(word, Collections.emptyList());
     }
 }
