@@ -5,7 +5,7 @@ public class PageEntry implements Comparable<PageEntry> {
     private final int page;
     private final int count;
 
-    private static Gson gson = new Gson();
+    private static final Gson gson = new Gson();
 
     public PageEntry(String pdfName, int page, int count){
         this.pdfName = pdfName;
@@ -16,5 +16,22 @@ public class PageEntry implements Comparable<PageEntry> {
     @Override
     public String toString() {
         return gson.toJson(this);
+    }
+
+    @Override
+    public int compareTo(PageEntry o) {
+        return 0;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public String getPdfName() {
+        return pdfName;
     }
 }
