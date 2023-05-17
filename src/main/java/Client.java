@@ -7,7 +7,7 @@ public class Client {
     final static int port = 8989;
     public static void main(String[] args) {
         try (Socket socket = new Socket(host,port); BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream())); PrintWriter out = new PrintWriter(socket.getOutputStream())){
-            out.println("вы");
+            out.println("бизнес");
             out.flush();
             System.out.println(in.readLine());
         } catch (IOException e) {

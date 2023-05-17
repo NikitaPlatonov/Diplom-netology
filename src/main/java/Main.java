@@ -12,7 +12,7 @@ public class Main {
                 try (Socket socket = serverSocket.accept(); BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream())); PrintWriter out = new PrintWriter(socket.getOutputStream())) {
                     System.out.println("Подключился клиент с таким портом " + socket.getPort());
                     String expectedWord = in.readLine();
-                    if(engine.search(expectedWord).equals(Collections.emptyList())){
+                    if (engine.search(expectedWord).equals(Collections.emptyList())) {
                         out.println("Совпадений нет");
                     } else {
                         out.println(engine.search(expectedWord));
