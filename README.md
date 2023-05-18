@@ -6,6 +6,5 @@
 
 ![diagram (1)](https://github.com/NikitaPlatonov/Diplom-netology/assets/124439125/0fc151c9-540e-4bdb-bd04-e2a431808a2c)
 
-## Пример использования
+## Установка
 
-1. Передаем слово 
