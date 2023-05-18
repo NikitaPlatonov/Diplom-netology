@@ -55,3 +55,12 @@ java -jar target/название_файла.jar
     </dependency>
 </dependencies>
 ```
+
+* Библиотека GSON для работы с json. Вы можете добавить зависимость в файле pom.xml вашего проекта:
+```xml
+<dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+```
