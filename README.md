@@ -8,3 +8,28 @@
 
 ## Установка
 
+Установка в Intellij IDEA:
+
+1. Клонируйте репозиторий:
+
+```git
+git clone https://github.com/NikitaPlatonov/Diplom-netology.git
+```
+
+2. Перейдите в каталог проекта:
+
+```git
+cd Diplom-netology
+```
+
+3. Соберите проект с помощью инструмента сборки, такого как Apache Maven:
+
+```git
+mvn clean install
+```
+
+4. После успешной сборки проекта вы можете запустить его с помощью команды:
+
+```git
+java -jar target/название_файла.jar
+```
